@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 # coding=utf-8
 
-import os
 import sys
 import ConfigParser
 import distutils.util
@@ -26,20 +25,10 @@ def ConfigSectionMap(section):
     return dict1
 
 
-def filetest(file,command):
-    if os.path.isfile(file):
-        if os.access(file, os.R_OK):
-            command
-        else:
-            sys.exit('The file of the %s that'
-                     'you do not have the read permission' % file)
-    else:
-        sys.exit('The file of the %s is '
-                 'maybe a directory not a file !' % file)
 
 def trylogin(configpath):
     # test the config file
-    filetest(configpath,Config.read(configpath))
+    Config.read(configpath)
     # try to load available settings from config file
     try:
         username = ConfigSectionMap("Zabbix API")['username']
@@ -63,4 +52,4 @@ def trylogin(configpath):
     print("Logging in on '" + api + "' with user '" + username + "'...")
     # Login to the Zabbix API
     zapi.login(username, password)
-
+    return zapi
