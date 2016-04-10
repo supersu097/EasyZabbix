@@ -41,7 +41,7 @@ class Args:
     def gethost(self):
         args = self.args_parser()
         # -H和-f选项互斥,而且必须存在一个参数
-        if args.hostname == None:
+        if args.hostname is None:
             help = Help()
             # 给Help的实例化对象help绑定属性file
             help.file = args.file.name

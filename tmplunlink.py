@@ -13,7 +13,7 @@ parser = common.Args(child_parser)
 zapi = parser.getzapi()
 
 
-def temp_unlink(host, hostid_int):
+def temp_unlink(host,hostid_int):
     # 思路:
     # 根据hostname拿到hostid,然后根据hostid拿到其所属的所有模板
     # 最后根据模板的名字拿到其所属的id,最后把hostid和模板id均组装为列表
@@ -46,7 +46,7 @@ def temp_unlink(host, hostid_int):
         print 'The host of %s do not have any templates!' % host
 
 
-def action():
+def host_check():
     hostlist = parser.gethost()
     for host in hostlist:
         # 从文件中解析出来的主机名列表有可能存在空字符串元素
@@ -61,7 +61,7 @@ def action():
             else:
                 with open('hosterror.log', 'a+') as hosterror:
                     hosterror.write('%s =>> The hostname can not find!\n' % host)
-                print '%s =>> The hostname can not find!' % host
+                print '[ %s ] =>> The hostname can not find!' % host
 
 if __name__ == '__main__':
-    action()
+    host_check()
