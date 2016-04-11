@@ -41,7 +41,7 @@ parser.add_argument(
 parser.add_argument(
     '--version',
     action='version',
-    version='%(prog)s 1.0'
+    version='%(prog)s --Version 1.0'
 )
 group = parser.add_mutually_exclusive_group(
     required=True
