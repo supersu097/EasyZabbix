@@ -29,7 +29,7 @@ The options of -H and -f only allow one!!!
  """
 )
 
-defconf = os.getenv("HOME") + "/.zbx.conf-test"
+defconf = os.getenv("HOME") + "/.zbx.conf"
 
 parser.add_argument(
     '-c','--config',
