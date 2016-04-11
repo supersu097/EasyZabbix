@@ -38,6 +38,11 @@ parser.add_argument(
     type=file
 )
 
+parser.add_argument(
+    '--version',
+    action='version',
+    version='%(prog)s 1.0'
+)
 group = parser.add_mutually_exclusive_group(
     required=True
 )
