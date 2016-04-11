@@ -4,11 +4,15 @@ import sys
 import login
 
 
-class Help:
+class Tools:
     def file_parser(self, file):
         with open(self.file, 'rU') as lines:
             data = lines.read().split('\n')
         return data
+    def hosterror(self,host):
+        with open('hosterror.log', 'a+') as hosterror:
+            hosterror.write('%s =>> The hostname can not find!\n' % host)
+        print '[ %s ] =>> The hostname can not find!\n' % host
 
 
 class Args:
@@ -42,11 +46,12 @@ class Args:
         args = self.args_parser()
         # -H和-f选项互斥,而且必须存在一个参数
         if args.hostname is None:
-            help = Help()
+            # f2l means file to list
+            f2l = Tools()
             # 给Help的实例化对象help绑定属性file
-            help.file = args.file.name
+            f2l.file = args.file.name
             # args.file为file类型,name是其属性,返回文件路径
-            hostlist = help.file_parser(help.file)
+            hostlist = f2l.file_parser(f2l.file)
             # 判断文件是否为空
             if hostlist == ['']:
                 sys.exit('The file of [%s] you passed do not'

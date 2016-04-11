@@ -43,11 +43,11 @@ group = parser.add_mutually_exclusive_group(
 )
 group.add_argument(
     '-H','--hostname',
-    help='One or more hostname you wanna do sth.',
+    help='One or more hostname you wanna do sth,if hostname has whitespace,pls use quotes to it!',
     nargs='+')
 group.add_argument(
     '-f','--file',
-    help='Many hostname in file',
+    help='Many hostname in file,notice that one line one hostname',
     type=file
 )
 
