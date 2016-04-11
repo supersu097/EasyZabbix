@@ -22,9 +22,9 @@ def cancelmonitor(host,host_dict):
     # 构造一个key为hostid和主机监控status的字典传进来
     zapi.host.update(**host_dict)
     if args.enable:
-        print 'The host of %s has monitored again!' % host
+        print 'The host of %s had monitored!' % host
     else:
-        print 'The host of %s has disabled monitoring!' % host
+        print 'The host of %s had disabled monitoring!' % host
 
 def host_check():
     hostlist = parser.gethost()
