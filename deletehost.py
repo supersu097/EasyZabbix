@@ -4,25 +4,24 @@
 import argparse
 from core import *
 
-child_parser=argparse.ArgumentParser(
+child_parser = argparse.ArgumentParser(
     parents=[parent_parser.parser],
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description='Description:delete host...',
     epilog="""%s %s """ % parent_parser.parent_usage())
 
-parser=common.Args(child_parser)
-zapi=parser.getzapi()
+zapi = common.getzapi(child_parser)
+
+def hostdel_record(host):
+
+
 
 def delete_host(hostid):
-    #File "/Library/Python/2.7/site-packages/pyzabbix/__init__.py",
-    #line 157, in fn args or kwargs
-    #吐槽:被坑了一下下,我要不要给https://github.com/CNSRE/Zabbix-PyZabbix/
-    # blob/master/zabbix_host_delete.py 提个request:-D
     zapi.host.delete(hostid)
 
 
 def host_check():
-    hostlist = parser.gethost()
+    hostlist = common.gethost(child_parser)
     for host in hostlist:
         # 从文件中解析出来的主机名列表有可能存在空字符串元素
         if host != '':
@@ -32,12 +31,11 @@ def host_check():
             # 判断主机是否存在
             if hostid_collection:
                 hostid = hostid_collection[0]['hostid']
-                print hostid
                 delete_host(hostid)
+                hostdel_record(host)
             else:
-                # 思路:与common模块中的gethost()方法一样
-                errp=common.Tools()
-                errp.host=host
-                errp.hosterror(host)
+                common.hostnotfind(host)
+
+
 if __name__ == '__main__':
     host_check()

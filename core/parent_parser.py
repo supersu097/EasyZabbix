@@ -2,7 +2,8 @@
 # coding=utf-8
 import argparse
 import os
-parser=argparse.ArgumentParser(
+
+parser = argparse.ArgumentParser(
     add_help=False,
     formatter_class=argparse.RawDescriptionHelpFormatter,
     description="""
@@ -32,7 +33,7 @@ The options of -H and -f only allow one!!!
 defconf = os.getenv("HOME") + "/.zbx.conf"
 
 parser.add_argument(
-    '-c','--config',
+    '-c', '--config',
     help='Config file location (defaults to $HOME/.zbx.conf)',
     default=defconf,
     type=file
@@ -41,22 +42,22 @@ parser.add_argument(
 parser.add_argument(
     '--version',
     action='version',
-    version='%(prog)s --Version 1.0'
+    version='%(prog)s --Version 1.1'
 )
 group = parser.add_mutually_exclusive_group(
     required=True
 )
 group.add_argument(
-    '-H','--hostname',
-    help='One or more hostname you wanna do sth,if hostname has whitespace,pls use quotes to it!',
+    '-H', '--hostname',
+    help='One or more hostname you wanna do sth,'
+         'if hostname has whitespace,pls use quotes to it!',
     nargs='+')
 group.add_argument(
-    '-f','--file',
+    '-f', '--file',
     help='Many hostname in file,notice that one line one hostname',
     type=file
 )
 
+
 def parent_usage():
-
-    return parser.description,parser.epilog
-
+    return parser.description, parser.epilog

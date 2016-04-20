@@ -13,8 +13,7 @@ parser.add_argument(
     required=True
 )
 
-parser=common.Args(parser)
-zapi=parser.getzapi()
+zapi=common.getzapi(parser)
 
 print 'Check success!'
 

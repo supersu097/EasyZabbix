@@ -2,60 +2,65 @@
 # coding=utf-8
 import sys
 import login
+import datetime
 
 
-class Tools:
-    def file_parser(self, file):
-        with open(self.file, 'rU') as lines:
-            data = lines.read().split('\n')
-        return data
-    def hosterror(self,host):
-        with open('hosterror.log', 'a+') as hosterror:
-            hosterror.write('%s =>> The hostname can not find!\n' % host)
-        print '[ %s ] =>> The hostname can not find!\n' % host
+def nowdate():
+    now = datetime.datetime.now()
+    nowdate = now.strftime("%Y-%m-%d %H:%M:%S")
+    return nowdate
 
 
-class Args:
-    def __init__(self, which_parser):
-        self.which_parser = which_parser
+def file_parser(fileinput):
+    with open(fileinput, 'rU') as lines:
+        data = lines.read().split('\n')
+    return data
 
-    def args_parser(self):
-        # 子解析器调用Args本类的parse_args()进行参数解析时需要传递其实例化对象
-        try:
-            args = self.which_parser.parse_args()
-        except IOError, e:
-            # -c,-f选项指定了参数类型为file,任何IO错误都会引发异常
-            # 紧接着打印脚本的帮助文档
-            self.which_parser.print_help()
-            self.which_parser.exit(
-                status=1,
-                message='\n' + str(e))
-        return args
 
-    def getzapi(self):
-        # config选项的类型定义为file类型,所以要想返回
-        # config文件的路径需要访问其name属性
-        args = self.args_parser()
-        # 实例化login模块中的ConfigLoad类
-        configload = login.ConfigLoad()
-        # 调用trylogin()方法尝试登录,登录完毕后返回zabbix API的实例对象
-        zapi = configload.trylogin(args.config.name)
-        return zapi
+def hostnotfind(host):
+    with open('hostnotfind.log', 'a+') as hosterror:
+        hosterror.write('[%s]ERROR: [%s]: The hostname can not find!\n'
+                        % (nowdate(), host))
+    print '[%s]ERROR: [%s]: The hostname can not find!\n' \
+          % (nowdate(), host)
 
-    def gethost(self):
-        args = self.args_parser()
-        # -H和-f选项互斥,而且必须存在一个参数
-        if args.hostname is None:
-            # f2l means file to list
-            f2l = Tools()
-            # 给Help的实例化对象help绑定属性file
-            f2l.file = args.file.name
-            # args.file为file类型,name是其属性,返回文件路径
-            hostlist = f2l.file_parser(f2l.file)
-            # 判断文件是否为空
-            if hostlist == ['']:
-                sys.exit('The file of [%s] you passed do not'
-                         ' have hostname in it!\n' % args.file.name)
-        else:
-            hostlist = args.hostname
-        return hostlist
+
+def trrigerdis_record():
+    pass
+
+
+def args_parser(which_parser):
+    # 子解析器调用Args本类的parse_args()进行参数解析时需要传递其实例化对象
+    try:
+        args = which_parser.parse_args()
+    except IOError, e:
+        # -c,-f选项指定了参数类型为file,任何IO错误都会引发异常
+        # 紧接着打印脚本的帮助文档
+        which_parser.print_help()
+        which_parser.exit(
+            status=1,
+            message='\n' + str(e))
+    return args
+
+
+def getzapi(which_parser):
+    # 实例化login模块中的ConfigLoad类
+    configload = login.ConfigLoad()
+    # 调用trylogin()方法尝试登录,登录完毕后返回zabbix API的实例对象
+    zapi = configload.trylogin(args_parser(which_parser).config.name)
+    return zapi
+
+
+def gethost(which_parser):
+    args = args_parser(which_parser)
+    # -H和-f选项互斥,而且必须存在一个参数
+    if args.hostname is None:
+        # args.file为file类型,name是其属性,返回文件路径
+        hostlist = file_parser(file)
+        # 判断文件是否为空
+        if hostlist == ['']:
+            sys.exit('The file of [%s] you passed do not'
+                     ' have hostname in it!\n' % args.file.name)
+    else:
+        hostlist = args.hostname
+    return hostlist
