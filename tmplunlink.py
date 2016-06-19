@@ -45,6 +45,7 @@ def temp_unlink(host, hostid):
         # 这里有个技巧,貌似不需要初始化列表,直接在变量的外侧添加[]就行了,如下:
         # hostid_list = []
         # hostid_list.append(hostid)
+        # Bug fixs method: 添加了templateids参数,具体原因见相关zabbix API文档
         zapi.host.massremove(hostids=[hostid],
                              templateids_clear=temp_id_list,
                              templateids=temp_id_list)
@@ -76,7 +77,6 @@ def host_check():
                 hostid = hostid_collection[0]['hostid']
                 temp_unlink(host, hostid)
             else:
-                # 思路:与common模块中的gethost()方法一样
                 common.hostnotfind(host)
 
 

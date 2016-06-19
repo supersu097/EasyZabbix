@@ -56,7 +56,6 @@ def host_check():
                 # 开始执行真正的操作
                 cancelmonitor(host, host_dict)
             else:
-                # 思路:与common模块中的gethost()方法一样
                 common.hostnotfind(host)
 
 
