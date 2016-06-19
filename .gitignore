@@ -62,5 +62,6 @@ target/
 .ipynb_checkpoints
 
 .idea/
+zabbix.conf
 tmp
 .DS_Store
