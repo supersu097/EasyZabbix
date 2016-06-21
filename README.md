@@ -17,10 +17,9 @@ sudo pip install pyzabbix
 [Zabbix API]
 username=Admin  
 password=zabbix  
-api=https://yourcompany.com/api_jsonrpc.php
+api=https://yourcompany.com/api_jsonrpc.php(zabbix前端网址要修改为自己公司的)
 no_verify=false
 ```
-备注：参数`api`后面跟的zabbix前端网址要修改为自己公司的
 
 - 验证是否配置成功
 在EasyZabbix这个项目的目录下执行如下命令(配置文件路径换成自己的):  
