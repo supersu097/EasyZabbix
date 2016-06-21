@@ -12,7 +12,7 @@ sudo pip install pyzabbix
 #### 2. 编写登录验证配置文件
 - 创建登录验证要用的配置文件,配置文件采用ini格式,  
 必须包含一个名为[Zabbix API]的section,创建一个名为
-`zabbix.conf`配置文件示例如下:  
+`.zabbix.conf`配置文件示例如下:  
 ```
 [Zabbix API]
 username=Admin  
