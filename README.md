@@ -1,6 +1,6 @@
 ###EasyZabbix
 This project learns from [zabbix-gnomes](https://github.com/q1x/zabbix-gnomes).Thanks!!!
-I rewrite the argument parsing and implement some bugs(bug as feature:-D) base on the project requirements of our team. 
+I rewrite the argument parsing and implement some bugs(bug as feature:-D) base on the project requirements of our team.   
 欢迎有需要的小伙伴们fxxk and star →_→
 
 ----------
@@ -23,11 +23,10 @@ no_verify=false
 备注：参数`api`后面跟的zabbix前端网址要修改为自己公司的
 
 - 验证是否配置成功
-在EasyZabbix这个项目的目录下执行如下命令(配置文件路径换成自己的)：
-`./configtest.py -c ~/.zabbix.conf`
-    说明：-c参数后面跟的是我当前的配置文件,如果最后返回`Check success`，说明登录验证的配置成功了，没有看到这个消息的，要根据脚本打印的异常信息自己判断是什么情况了，一般来说有网络问题(在家使用的话要登录公司VPN)，账号密码问题，然后再核对一下配置文件基本就可以解决了。
+在EasyZabbix这个项目的目录下执行如下命令(配置文件路径换成自己的):  
+`./configtest.py -c ~/.zabbix.conf`  
+说明：-c参数后面跟的是我当前的配置文件,如果最后返回`Check success`，说明登录验证的配置成功了，没有看到这个消息的，要根据脚本打印的异常信息自己判断是什么情况了，一般来说有网络问题(在家使用的话要登录公司VPN)，账号密码问题，然后再核对一下配置文件基本就可以解决了。
     
-
 #### 3. 参数及功能说明
 - 公共参数
 这些参数为EasyZabbix这个项目下所有python脚本共享的(除了configtest.py校验脚本)
