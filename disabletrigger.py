@@ -21,5 +21,5 @@ child_parser.add_argument(
     help='The triggerid you wanna disable',
     type=int
 )
-zapi = common.getzapi(child_parser)
+zapi = common.zapiget(child_parser)
 args = common.args_parser(child_parser)
