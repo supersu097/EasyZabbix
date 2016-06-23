@@ -2,8 +2,8 @@
 # coding=utf-8
 
 import argparse
-from core import *
-
+from core import parent_parser
+from core import common
 child_parser = argparse.ArgumentParser(
     parents=[parent_parser.parser],
     formatter_class=argparse.RawDescriptionHelpFormatter,
