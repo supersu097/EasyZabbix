@@ -65,7 +65,7 @@ PS:用户名、密码以及zabbix前端网址要修改为自己公司的
 >`disablemonitor.py`  
 这个脚本打算用来批量关闭多个主机的同一个触发器的报警，平常在工作中经常遇到salt-minion相关的报警洪流，感觉暂时屏蔽了报警用处不大，最后最好还是要去用salt刷配置来解除报警比较好。不过也有多个主机上的某个service提示down了，直接unlink模板因为还有其他item要监控，不能这样做，产研一时半会搞不定，zabbix一直报警，leader会看报警量，这时候后还是有必要暂时屏蔽下的，公司有实现snooze功能也有web管理界面，但是没有看到可以批量操作的功能，像service down掉的情况最好还是用snooze比较好，disable的话万一后面忘记enable了就不好了。对了，这个脚本也只是把参数解析写好了，具体是disable掉还是snooze掉报警的功能还没有写。
 
-#### - **其他功能扩展**
+#### **其他功能扩展**
 这里以还没有实现功能的`disablemonitor.py`为例，脚本部分内容如下：
 ```python
 import argparse #导入python官方自带命令行参数解析标准库
