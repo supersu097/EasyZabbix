@@ -60,7 +60,7 @@ PS:用户名、密码以及zabbix前端网址要修改为自己公司的
 用来批量关闭不需要监控的主机（当然也可以关闭一个，如果向该脚本传递-e或者--enable参数，将会批量开启主机的监控）
 
 >`tmplunlink.py`  
-用来批量unlink掉该主机下的所有模板同时清除其所属的所有实例(补充：比如item，trigger)，详见此处[zabbix官方文档](https://www.zabbix.com/documentation/2.2/manual/config/templates/linking"zabbix官方文档")最后一行。ps：这里单独unlink一个模板的参数已经添加在了代码里面，但是功能还没有实现，以后有时间了可以实现下，或者大家谁看到后实现一下这个功能然后提个PR是很欢迎的。。这个功能最好也支持unlink个多个主机的同一个模板（这个功能的实现可以参考下面的<其他功能扩展>这个section），用来应对大面积出现的因为模板设置的问题而引起的报警报警洪流。
+用来批量unlink掉该主机下的所有模板同时清除其所属的所有实例(补充：比如item，trigger)，详见此处[zabbix官方文档](https://www.zabbix.com/documentation/2.2/manual/config/templates/linking)最后一行。ps：这里单独unlink一个模板的参数已经添加在了代码里面，但是功能还没有实现，以后有时间了可以实现下，或者大家谁看到后实现一下这个功能然后提个PR是很欢迎的。。这个功能最好也支持unlink个多个主机的同一个模板（这个功能的实现可以参考下面的<其他功能扩展>这个section），用来应对大面积出现的因为模板设置的问题而引起的报警报警洪流。
 
 >`disablemonitor.py`  
 这个脚本打算用来批量关闭多个主机的同一个触发器的报警，平常在工作中经常遇到salt-minion相关的报警洪流，感觉暂时屏蔽了报警用处不大，最后最好还是要去用salt刷配置来解除报警比较好。不过也有多个主机上的某个service提示down了，直接unlink模板因为还有其他item要监控，不能这样做，产研一时半会搞不定，zabbix一直报警，leader会看报警量，这时候后还是有必要暂时屏蔽下的，公司有实现snooze功能也有web管理界面，但是没有看到可以批量操作的功能，像service down掉的情况最好还是用snooze比较好，disable的话万一后面忘记enable了就不好了。对了，这个脚本也只是把参数解析写好了，具体是disable掉还是snooze掉报警的功能还没有写。
